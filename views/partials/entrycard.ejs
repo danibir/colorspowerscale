@@ -1,0 +1,11 @@
+<a href="/entry/view/<%= entry.id %>">
+    <div class="entryCard">
+        <img class="entryImg" src="
+            <% if (entry.img) { %>
+                /entimg/<%= entry.img %>
+            <% } else { %>
+                /imgs/noface.png
+            <% } %>" alt="">
+        <h2 class="entryTitle"><%= entry.name %></h2>
+    </div>
+</a>

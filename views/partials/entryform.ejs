@@ -1,0 +1,78 @@
+<p class="subtext">(* = Optional)</p>
+<form action="/entry/<%= action %><% if (id) { %>/<%= id %><% } %>" method="post" class="entryForm">
+    <input type="hidden" id="species-data" name="species-data" value='<%- JSON.stringify(lib.species)%>' %>>
+    <input type="hidden" id="origin-data" name="origin-data" value='<%- JSON.stringify(lib.origins)%>' %>>
+    <input type="hidden" id="abilities-data" name="abilities-data" value='<%- JSON.stringify(lib.abilities)%>' %>>
+    <input type="hidden" id="equipment-data" name="equipment-data" value='[]' %>>
+    
+    <label for="name">Name</label>
+    <br>
+    <input type="text" name="name" id="name" value="<%= predata.name %>" required>
+    <br>
+    <br>
+    <label for="age">Age</label>
+    <br>
+    <input type="number" name="age" id="age" value="<%= predata.age %>" required>
+    <br>
+    <br>
+    <label for="species-item">Species</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: lib.species, array: [predata.species], name: "species", require: 'single-any' }) %>                    
+        </div>
+    <br>
+    
+    <label for="origin-item">Origin</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: lib.origins, array: [predata.origin], name: "origin", require: 'single-any' }) %>                    
+        </div>
+    <br>
+    
+    <label for="vdescription">Visual description</label>
+    <br>
+    <textarea name="vdescription" id="" class="formTextArea"><%= predata.vdescription %></textarea>
+    <br>
+    <br>
+
+    <label for="backstory">Backstory</label>
+    <br>
+    <textarea name="backstory" id="" class="formTextArea"><%= predata.backstory %></textarea>
+    <br>
+    <br>
+
+    
+    <label for="motivations">Motivations</label>
+    <br>
+    <textarea name="motivations" id="" class="formTextArea"><%= predata.motivations %></textarea>
+    <br>
+    <br>
+
+    <label for="equipment-items">Tools and equipment*</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: [], array: [predata.equipment], name: "equipment", require: 'any' }) %>                    
+        </div>
+    <br>
+    <br>
+    
+    <label for="abilities-item">Abilities*</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: lib.abilities, array: [predata.abilities], name: "abilities", require: 'any' }) %>                    
+        </div>
+    <br>
+    <% console.log(JSON.stringify(predata)) %>
+    <% for( stat of stats ) { %>
+        <label for="tier"><%= stat.name.replace('_', ' ') %>:</label>
+        <%- include('./tier', { name: stat.name }) %>
+        <br>
+    <% } %>
+    <div class="center">
+        <button>
+            <h1>Submit</h1>
+        </button>
+    </div>
+</form>
+<script src="/js/tiers.js" defer onload="preEnable(predata)"></script>
+<s<%-include('./loadPredataWorkAround.ejs')%>t>

@@ -1,0 +1,22 @@
+
+<section class="statVarsBox">
+    <% for( variation of variations ) { %>
+        <section class="statVarBox">
+            <div class="statDisplay">
+                <input type="radio" 
+                name="<%= nameName %>-<%= subtier.rank %>" 
+                class="
+                    <%= nameName %>-<%= subtier.rank %>
+                    <%= nameName %>
+                "
+                id="<%= name %>-<%= tier.rank %>-<%= subtier.rank %>-<%= variation.rank %>" 
+                class="<%= name %>" 
+                value="<%= variation.rank %>" 
+                disabled>
+                <label 
+                for="<%= name %>-<%= tier.rank %>-<%= subtier.rank %>-<%= variation.rank %>" 
+                ><%= variation.name %></label>
+            </div>
+        </section>
+    <% } %>
+</section>

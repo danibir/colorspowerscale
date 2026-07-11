@@ -1,0 +1,23 @@
+
+<section class="statSubtiersBox">
+    <% for( subtier of subtiers ) { %>
+        <section class="statSubtierBox" hidden>
+            <div class="statDisplay">
+                <input type="radio" 
+                name="<%= nameName %>-<%= tier.rank %>"
+                class="
+                    <%= nameName %>-<%= tier.rank %>
+                    <%= nameName %>
+                "
+                id="<%= name %>-<%= tier.rank %>-<%= subtier.rank %>" 
+                class="<%= name %>" 
+                value="<%= subtier.rank %>" 
+                disabled>
+                <label 
+                for="<%= name %>-<%= tier.rank %>-<%= subtier.rank %>"
+                ><%= subtier.letter %> - <%= subtier.name %></label>
+            </div>
+            <%- include('./tiervar', { nameName: `${nameName}-${tier.rank}-var` }) %>
+        </section>
+    <% } %>
+</section>

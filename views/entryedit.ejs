@@ -1,0 +1,7 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <a href="/entry/view/<%= entry.id %>">Back to entry</a>
+        <br>
+        <%- include('./partials/entryform', { action: "edit", id: entry.id, predata: entry }) %>
+    </div>
+<%- include('./partials/foot') %>

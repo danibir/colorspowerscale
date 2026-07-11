@@ -1,0 +1,13 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <form action="/" method="get" class="searchbar">
+            <input type="text" name="search" placeholder="Search..." value="<%= search %>">
+        </form>
+        <% for( entry of entries ) { %>
+            <%- include('./partials/entrycard') %>
+        <% } %>
+        <% if (entries.length < 1) { %>
+            <h2>No results...</h2>
+        <% } %>
+    </div>
+<%- include('./partials/foot') %>

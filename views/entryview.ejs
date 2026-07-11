@@ -1,0 +1,89 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <div class="flexrow">
+            <div class="entrySeg flexcol">
+                <section class="entryPart">
+                    <h1 class="entryTitle"><%= entry.name %></h1>
+
+                    <hr class="line">
+
+                    <img class="entryImg" src="
+                        <% if (entry.img) { %>
+                            /entimg/<%= entry.img %>
+                        <% } else { %>
+                            /imgs/noface.png
+                        <% } %>" alt="">
+                    <a href="/entry/changeImage/<%= entry.id %>">
+                        <button class="entryChangeImg">Change image</button>
+                    </a>
+
+                    <p class="entryText"><%= entry.species %><% if (!entry.species) { %>Unknown species<% } %>, age <%= entry.age %><% if (!entry.age) { %>unknown<% } %></p>
+                    <p class="entryText">Originating from <%= entry.origin %><% if (!entry.origin) { %>unknown source<% } %></p>
+
+                    <hr class="line">
+
+                    <h3 class="entryTitle">Description:</h3>
+                    <p class="entryText"><%- entry.vdescription.replace(/\r?\n/g, '<br>') %><% if (!entry.vdescription) { %>No description provided<% } %></p>
+
+                    <hr class="line">
+
+                    <h3 class="entryTitle">Story:</h3>
+                    <p class="entryText"><%- entry.backstory.replace(/\r?\n/g, '<br>') %><% if (!entry.backstory) { %>No description provided<% } %></p>
+
+                    <h3 class="entryTitle">Motivations:</h3>
+                    <p class="entryText"><%- entry.motivations.replace(/\r?\n/g, '<br>') %><% if (!entry.motivations) { %>No description provided<% } %></p>
+                    <hr class="line">
+
+                </section>
+            </div>
+            <div class="entrySeg flexcol">
+                <h2>Stats</h2>
+                <% if (entry.abilities && entry.abilities.length > 0) { %>
+                    <section class="flexrow statPart">
+                        <h4 class="statName">Abilities:</h4>
+                        <div class="statCollection">
+                            <% for( ability of entry.abilities ) { %>
+                                <h6 class="statItem"><%= ability %></h6>
+                            <% } %>
+                        </div>
+                    </section>
+                <% } %>
+                <% if (entry.equipment && entry.equipment.length > 0) { %>
+                    <section class="flexrow statPart">
+                        <h4 class="statName">Equipment:</h4>
+                        <div class="statCollection">
+                            <% for( equipm of entry.equipment ) { %>
+                                    <h6 class="statItem"><%= equipm %></h6>
+                            <% } %>
+                        </div>
+                    </section>
+                <% } %>
+                <% for( stat of stats ) { %>
+                    <section class="flexrow statPart">
+                        <h3 class="statName"><%= stat.name.replace('_', ' ') %>:</h3>
+                        <h2 class="statTier">
+                            <% if (entry.stats[stat.name]) { %>
+                                <% subtier = stat.type.find(t => t.rank == (entry.stats[stat.name].tier)).subtiers.find(st => st.rank == entry.stats[stat.name].subtier) %>
+
+                                <%= variations.find(v => v.rank == (entry.stats[stat.name].variant)).name %>
+                                <%= entry.stats[stat.name].tier %><%= subtier.letter %>
+                                -  <%= subtier.name %> level
+                            <% } else { %>
+                                Undefined
+                            <% } %>
+                        </h2>
+                    </section>
+                <% } %>
+            </div>
+        </div>
+        <div class="entrySeg flexcol">
+            <section class="entryButtons">
+                <a href="/entry/format/<%= entry.id %>"><h2 class="entryButton">Download</h2></a>
+                <a href="/entry/edit/<%= entry.id %>"><h2 class="entryButton">Edit</h2></a>
+                <form action="/entry/delete/<%= entry.id %>" method="post" class="noForm">
+                    <button class="noButton"><h2 class="entryButton">Delete</h2></button>
+                </form>
+            </section>
+        </div>
+    </div>
+<%- include('./partials/foot') %>

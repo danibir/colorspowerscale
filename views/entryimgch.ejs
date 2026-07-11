@@ -1,0 +1,13 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <a href="/entry/view/<%= entry.id %>">Back to entry</a>
+        <h1>Change image (<%= entry.name %>)</h1>
+        <form action="/entry/changeImage/<%= entry.id %>" method="post" enctype="multipart/form-data">
+            <label for="img">Choose an image</label>
+            <br>
+            <input type="file" name="img" id="img">
+            <br>
+            <button>Upload</button>
+        </form>
+    </div>
+<%- include('./partials/foot') %>

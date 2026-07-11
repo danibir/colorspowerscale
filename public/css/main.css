@@ -1,0 +1,272 @@
+* {
+    --primary: #dfe8f3;
+    --secondary: #939cbe;
+    --tri: #55507a;
+    --quad: #3a2f50;
+    --background: #1a1a2a;
+    --marker: rgb(7, 3, 18);
+    text-decoration: none;
+    color: var(--marker);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+body {
+    background-color: var(--background);
+}
+.bodybox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flexrow {
+    display: flex;
+    flex-direction: row;
+}
+.flexcol {
+    display: flex;
+    flex-direction: column;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainBox {
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    padding: 30px;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--tri);
+    border-radius: 2px;
+}
+nav h2 {
+    background-color: var(--primary);
+    padding: 20px;
+    width: 20vw;
+    margin: 0.7vw 1vw 0.7vw;
+    text-align: center;
+    border-radius: 20px;
+}
+.statBox {
+    background-color: var(--secondary);
+    border-color: var(--tri);
+    border-width: 5px;
+    border-radius: 3px;
+    border-style: solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    min-width: 30.5vw;
+}
+.statDisplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+.statDisplay label {
+    margin-right: 1vw;
+    height: 1.5vw;
+    min-width: 7vw;
+    display: flex;
+    align-items: center;
+}
+.statDisplay input {
+    transform: scale(1.5);
+    width: 1vw;
+}
+.statTierBox {
+    display: flex;
+    flex-direction: row;
+}
+.statSubtiersBox {
+    display: none;
+    flex-direction: column;
+    background-color: var(--tri);
+    border-color: var(--quad);
+    border-width: 5px;
+    border-radius: 3px;
+    border-style: solid;
+    margin: 5px;
+}
+.statSubtierBox {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+.statVarsBox {
+    display: none;
+    flex-direction: column;
+    background-color: var(--quad);
+    border-color: var(--background);
+    border-width: 5px;
+    border-radius: 3px;
+    border-style: solid;
+    margin: 5px;
+    padding: 5px;
+}
+
+.entryCard {
+    background-color: var(--secondary);
+    border-color: var(--tri);
+    border-width: 5px;
+    border-radius: 3px;
+    border-style: solid;
+    padding: 4px;
+    margin: 5px;
+    width: 30vw;
+    display: flex;
+    align-items: center;
+}
+.entryCard * {
+    margin: 0px;
+}
+.entryCard img {
+    height: 3vw;
+    width: 3vw;
+}
+.entrySeg {
+    background-color: var(--secondary);
+    border-radius: 2px;
+    width: 100%;
+    margin: 2px;
+    text-align: center;
+}
+.entryPart {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--tri);
+    border-radius: 2px;
+    margin: 12px;
+    padding: 14px;
+    justify-content: center;
+    align-items: center;
+}
+.entryImg {
+    width: 97.5%;
+    border-radius: 36px;
+}
+.entryChangeImg {
+    opacity: 0.8;
+    background-color: var(--secondary);
+}
+.entryText {
+    background-color: var(--primary);
+    border-radius: 2px;
+    padding: 8px;
+    text-align: left;
+    font-size: 1vw;
+    max-width: 80%;
+}
+.entryTitle {
+    color: var(--primary);
+    text-align: center;
+    padding: 10px;
+    font-size: 2vw;
+}
+.line {
+    background-color: var(--marker);
+    width: 95%;
+    opacity: 0.5;
+    height: 0.15vw;
+    border-style: solid;
+    border-width: 0;
+}
+.statName {
+    margin: 12px;
+    padding: 12px;
+    font-size: 1.1vw;
+    font-family: 'Courier New', Courier, monospace;
+}
+.statTier {
+    margin: 12px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.statPart {
+    background-color: var(--primary);
+    border-radius: 5px;
+    margin: 5;
+    font-size: 1.2vw;
+}
+.statCollection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: var(--tri);
+    border-radius: 5px;
+}
+.statCollection .statItem {
+    background-color: var(--primary);
+    border-color: var(--secondary);
+    border-width: 4px;
+    border-radius: 3px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.entryForm {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.entryForm input[type=number],
+.entryForm input[type=text] {
+    width: 15vw;
+    height: 1.25vw;
+    font-size: 0.9vw;
+}
+.entryForm textarea {
+    width: 25vw;
+    height: 200px;
+    resize: vertical;
+    font-size: 0.8vw;
+}
+.noForm {
+    padding: 0px;
+    margin: 0px;
+}
+.noButton {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+    border-style: none;
+    cursor: pointer;
+}
+.entryButtons {
+    background-color: var(--tri);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-width: 1vw;
+    border-color: var(--secondary);
+    border-style: solid;
+}
+.entryButton {
+    margin: 1vw;
+    padding: 1vw;
+    background-color: var(--secondary);
+    width: 10vw;
+    font-size: 2vw;
+}
+.searchbar input {
+    width: 20vw;
+    height: 1.5vw;
+    font-size: 1.2vw;
+}
+.subtext {
+    color: var(--secondary);
+}

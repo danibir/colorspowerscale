@@ -1,0 +1,11 @@
+<section id="<%= name %>">
+    <input type="text" list="brow_<%= name %>" id="<%= name %>-input">
+    <label onclick="addViaInput('<%= name %>', '<%= require %>')" class="searchbarButton">Add</label>
+    <datalist id="brow_<%= name %>">
+        <% for( let a = 0; a < datalist.length; a++ ) { %>
+                <% data = datalist[a]%>
+                <option value="<%= data%>"></option>
+        <% } %>
+    </datalist>
+    <script src="/js/searchbar.js" defer onload="loadArray('<%= name %>', '<%= array %>', '<%= name %>')"></script>
+</section>
