@@ -1,7 +1,5 @@
 <p class="subtext">(* = Optional)</p>
 <form action="/entry/<%= action %><% if (id) { %>/<%= id %><% } %>" method="post" class="entryForm">
-    <input type="hidden" id="species-data" name="species-data" value='<%- JSON.stringify(lib.species)%>' %>>
-    <input type="hidden" id="origin-data" name="origin-data" value='<%- JSON.stringify(lib.origins)%>' %>>
     <input type="hidden" id="abilities-data" name="abilities-data" value='<%- JSON.stringify(lib.abilities)%>' %>>
     <input type="hidden" id="equipment-data" name="equipment-data" value='[]' %>>
     
@@ -15,18 +13,26 @@
     <input type="number" name="age" id="age" value="<%= predata.age %>" required>
     <br>
     <br>
-    <label for="species-item">Species</label>
+
+    <label for="species-data">Species</label>
     <br>
-        <div class="adminFormInpBox">
-            <%- include('./anysearch.ejs', { datalist: lib.species, array: [predata.species], name: "species", require: 'single-any' }) %>                    
-        </div>
+    <input type="text" name="species" list="species-list" id="species" value="<%= predata.species %>" required>
+    <datalist id="species-list">
+        <% for( data of lib.species ) { %>
+            <option value="<%= data%>"><%= data%></option>
+        <% } %>
+    </datalist>
     <br>
-    
-    <label for="origin-item">Origin</label>
     <br>
-        <div class="adminFormInpBox">
-            <%- include('./anysearch.ejs', { datalist: lib.origins, array: [predata.origin], name: "origin", require: 'single-any' }) %>                    
-        </div>
+    <label for="origin">Origin</label>
+    <br>
+    <input type="text" name="origin" list="origin-list" id="origin" value="<%= predata.origin %>" required>
+    <datalist id="origin-list">
+        <% for( data of lib.origins ) { %>
+            <option value="<%= data%>"></option>
+        <% } %>
+    </datalist>
+    <br>
     <br>
     
     <label for="vdescription">Visual description</label>

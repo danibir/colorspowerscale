@@ -8,8 +8,8 @@ const entryParse = async (input) => {
     
     output.name = input.name
     output.age = input.age
-    output.species = input["species-item"]
-    output.origin = input["origin-item"]
+    output.species = input.species
+    output.origin = input.origin
     output.vdescription = input.vdescription
     output.backstory = input.backstory
     output.motivations = input.motivations
