@@ -3,7 +3,7 @@
         <div class="flexrow">
             <div class="entrySeg flexcol">
                 <section class="entryPart">
-                    <h1 class="entryTitle"><%= entry.name %></h1>
+                    <h1 class="entryTitle"><%= entry.name %><% if (!entry.name) {%>No name provided<%}%></h1>
 
                     <hr class="line">
 
@@ -23,15 +23,15 @@
                     <hr class="line">
 
                     <h3 class="entryTitle">Description:</h3>
-                    <p class="entryText"><%- entry.vdescription.replace(/\r?\n/g, '<br>') %><% if (!entry.vdescription) { %>No description provided<% } %></p>
+                    <p class="entryText"><% if (entry.vdescription) { %><%- entry.vdescription.replace(/\r?\n/g, '<br>') %><% } else { %>No description provided<% } %></p>
 
                     <hr class="line">
 
                     <h3 class="entryTitle">Story:</h3>
-                    <p class="entryText"><%- entry.backstory.replace(/\r?\n/g, '<br>') %><% if (!entry.backstory) { %>No description provided<% } %></p>
+                    <p class="entryText"><% if (entry.backstory) { %><%- entry.backstory.replace(/\r?\n/g, '<br>') %><% } else { %>No backstory provided<% } %></p>
 
                     <h3 class="entryTitle">Motivations:</h3>
-                    <p class="entryText"><%- entry.motivations.replace(/\r?\n/g, '<br>') %><% if (!entry.motivations) { %>No description provided<% } %></p>
+                    <p class="entryText"><% if (entry.motivations) { %><%- entry.motivations.replace(/\r?\n/g, '<br>') %><% } else { %>No motivations provided<% } %></p>
                     <hr class="line">
 
                 </section>

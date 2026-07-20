@@ -11,6 +11,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
+Router.get('/create/choose', c_entry.createChoose_get)
+Router.post('/create/template', c_entry.createTemplate_post)
 Router.get('/create', c_entry.create_get)
 Router.post('/create', c_entry.create_post)
 Router.get('/edit/:id', c_entry.edit_get)

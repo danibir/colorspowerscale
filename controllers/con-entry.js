@@ -14,9 +14,21 @@ const model = require('../model')
 const stats = model.stats
 const variations = model.variations
 
+const createChoose_get = (req, res) => {
+    res.render('entrycreatechoose', { })
+}
 const create_get = async (req, res) => {
     const lib = await entryLib()
     res.render('entrycreate', { stats, variations, lib })
+}
+const createTemplate_post = async (req, res) => {
+    const object = {
+        stats: {}
+    }
+    object.id = await model.createId()
+    object.name = `Template ${object.id}`
+    entryWrite(object, object.id)
+    res.redirect(`/entry/view/${object.id}`)
 }
 const create_post = async (req, res) => {
     const input = req.body
@@ -137,6 +149,8 @@ const format_get = async (req, res) => {
 }
 
 module.exports = {
+    createChoose_get,
+    createTemplate_post,
     create_get,
     create_post,
     edit_get,
