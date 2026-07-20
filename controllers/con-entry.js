@@ -65,6 +65,7 @@ const edit_post = async (req, res) => {
     }
     output = output.output
     output.id = id
+    output.img = entry.img
     entryWrite(output, output.id)
     res.redirect(`/entry/view/${id}`)
 }
