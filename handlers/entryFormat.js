@@ -12,7 +12,7 @@ const entryFormat = (entry) => {
         output += "\t"
     }
     function lineArr(arr,) {
-        if (arr.length == 0)
+        if (!arr || arr.length == 0)
             line('None')
         for (var i = 0; i < arr.length; i++) {
             if (i != 0) line(', ')
