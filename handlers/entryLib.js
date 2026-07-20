@@ -28,7 +28,9 @@ const entryLib = async () => {
     const lib = {
         species: [],
         origins: [],
-        abilities: []
+        abilities: [],
+        strengths: [],
+        weaknesses: [],
     }
     for (entry of entries) {
         if (entry.species) lib.species.push(entry.species)
@@ -38,10 +40,22 @@ const entryLib = async () => {
                 lib.abilities.push(ability)
             }
         }
+        if (entry.strengths) {
+            for (strength of entry.strengths) {
+                lib.strengths.push(strength)
+            }
+        }
+        if (entry.weaknesses) {
+            for (weakness of entry.weaknesses) {
+                lib.weaknesses.push(weakness)
+            }
+        }
     }
     lib.species = getTopResults(lib.species)
     lib.origins = getTopResults(lib.origins)
     lib.abilities = getTopResults(lib.abilities)
+    lib.strengths = getTopResults(lib.strengths)
+    lib.weaknesses = getTopResults(lib.weaknesses)
     return lib
 }
 

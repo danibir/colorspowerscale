@@ -68,12 +68,28 @@
             <%- include('./anysearch.ejs', { datalist: lib.abilities, array: [predata.abilities], name: "abilities", require: 'any' }) %>                    
         </div>
     <br>
-    <% console.log(JSON.stringify(predata)) %>
+    <br>
+    <label for="strengths-item">Strengths*</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: lib.strengths, array: [predata.strengths], name: "strengths", require: 'any' }) %>                    
+        </div>
+    <br>
+    <br>
+    <label for="weaknesses-item">Weaknesses*</label>
+    <br>
+        <div class="adminFormInpBox">
+            <%- include('./anysearch.ejs', { datalist: lib.weaknesses, array: [predata.weaknesses], name: "weaknesses", require: 'any' }) %>                    
+        </div>
+    <br>
+    <br>
+
     <% for( stat of stats ) { %>
         <label for="tier"><%= stat.name.replace('_', ' ') %>:</label>
         <%- include('./tier', { name: stat.name }) %>
         <br>
     <% } %>
+    
     <div class="center">
         <button>
             <h1>Submit</h1>

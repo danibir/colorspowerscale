@@ -58,6 +58,26 @@
                         </div>
                     </section>
                 <% } %>
+                <section class="flexrow statPart">
+                    <h4 class="statName">Strengths:</h4>
+                    <div class="statCollection">
+                        <% if (!entry.strengths || entry.strengths.length == 0) { %> 
+                            <h6 class="statItem">None</h6>
+                        <% } else { for( strength of entry.strengths ) { %>
+                            <h6 class="statItem"><%= strength %></h6>
+                        <% }} %>
+                    </div>
+                </section>
+                <section class="flexrow statPart">
+                    <h4 class="statName">Weaknesses:</h4>
+                    <div class="statCollection">
+                        <% if (!entry.weaknesses || entry.weaknesses.length == 0) { %> 
+                            <h6 class="statItem">None</h6>
+                        <% } else { for( weakness of entry.weaknesses ) { %>
+                            <h6 class="statItem"><%= weakness %></h6>
+                        <% }} %>
+                    </div>
+                </section>
                 <% for( stat of stats ) { %>
                     <section class="flexrow statPart">
                         <h3 class="statName"><%= stat.name.replace('_', ' ') %>:</h3>
