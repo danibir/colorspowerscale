@@ -11,9 +11,8 @@ const entryFormat = (entry) => {
     function tab() {
         output += "\t"
     }
-    function lineArr(arr,) {
-        if (arr.length == 0)
-            line('None')
+    function lineArr(arr) {
+        if (!arr || arr.length == 0) return line('None')
         for (var i = 0; i < arr.length; i++) {
             if (i != 0) line(', ')
             line(`${arr[i]}`)
