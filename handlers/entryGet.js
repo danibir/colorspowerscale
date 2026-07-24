@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const entryGet = async () => {
-    const location = 'entries'
+    const location = '.localData/entries'
     if (!fs.existsSync(location)) {
         return []
     }

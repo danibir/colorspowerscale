@@ -1,0 +1,13 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <a href="/entry">Back to character list</a>
+        <h1>Upload character</h1>
+        <form action="/entry/upload/" method="post" enctype="multipart/form-data">
+            <label for="zip">Choose zip file</label>
+            <br>
+            <input type="file" name="zip" id="zip" accept=".zip" required>
+            <br>
+            <button>Upload</button>
+        </form>
+    </div>
+<%- include('./partials/foot') %>

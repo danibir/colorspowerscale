@@ -143,5 +143,5 @@ vite.config.ts.timestamp-*
 .vite/
 
 # Custom
-public/entimg/
-entries/
+public/localImg/
+.localData/

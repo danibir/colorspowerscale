@@ -2,7 +2,20 @@ const fs = require('fs')
 
 const entryWrite = (obj, filename) => {
     const jsonString = JSON.stringify(obj, null, 2)
-    let folderName = 'entries'
+    let folderName = '.localData'
+    if (fs.existsSync(folderName)) {
+        console.log('Entry collection folder found.')
+    } else {
+        console.log('Entry collection folder does not exist. Creating folder.')
+        fs.mkdirSync(folderName, {}, (err)=>{
+            if (err) {
+                console.error(`Error creating folder ((${folderName})), error: `, err)
+            } else {
+                console.log(`Successfully created folder (${folderName})`)
+            }
+        })
+    }
+    folderName = `${folderName}/entries`
     if (fs.existsSync(folderName)) {
         console.log('Entry collection folder found.')
     } else {

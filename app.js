@@ -12,6 +12,8 @@ env.config()
 
 const router_main = require('./routers/rou-main')
 const router_entry = require('./routers/rou-entry')
+const router_show = require('./routers/rou-show')
+const router_config = require('./routers/rou-config')
 
 const renderErrorPage = require('./handlers/renderErrorPage')
 
@@ -30,6 +32,8 @@ app.use(cookieParser())
 //routers
 app.use('/', router_main)
 app.use('/entry', router_entry)
+app.use('/show', router_show)
+app.use('/config', router_config)
 app.use((req, res) => {
     renderErrorPage(res, 404, "No page found.")
 })

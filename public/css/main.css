@@ -1,9 +1,9 @@
 * {
     --primary: #dfe8f3;
     --secondary: #939cbe;
-    --tri: #55507a;
-    --quad: #3a2f50;
-    --background: #1a1a2a;
+    --tri: #373261;
+    --quad: #201538;
+    --background: #080828;
     --marker: rgb(7, 3, 18);
     text-decoration: none;
     color: var(--marker);
@@ -41,19 +41,35 @@ body {
     width: 60vw;
     padding: 30px;
 }
+.titleimg {
+    border-radius: 60px;
+    height: 10vw;
+}
 nav {
     display: flex;
     flex-direction: row;
     background-color: var(--tri);
     border-radius: 2px;
+    width: 60vw;
+}
+nav a {
+    display: flex;
+    background-color: var(--primary);
+    margin: 0.7vw 1vw 0.7vw;
+    padding: 20px;
+    border-radius: 20px;
+    flex-grow: 1;
+    justify-content: center;
+}
+nav .navpicked {
+    background-color: var(--quad);
+}
+nav .navpicked h2 {
+    color: var(--primary);
 }
 nav h2 {
-    background-color: var(--primary);
-    padding: 20px;
-    width: 20vw;
-    margin: 0.7vw 1vw 0.7vw;
+    margin: 0px;
     text-align: center;
-    border-radius: 20px;
 }
 .statBox {
     background-color: var(--secondary);
@@ -246,6 +262,14 @@ nav h2 {
     border-style: none;
     cursor: pointer;
 }
+.smallButton {
+    margin: 0.6vw;
+    padding: 0.6vw;
+    background-color: var(--secondary);
+    display: flex;
+    flex-grow: 1;
+    font-size: 1.2vw;
+}
 .entryButtons {
     background-color: var(--tri);
     display: flex;
@@ -259,7 +283,8 @@ nav h2 {
     margin: 1vw;
     padding: 1vw;
     background-color: var(--secondary);
-    width: 10vw;
+    display: flex;
+    flex-grow: 1;
     font-size: 2vw;
 }
 .searchbar input {

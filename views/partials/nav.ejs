@@ -1,4 +1,4 @@
 <nav>
-    <a href="/"><h2>Home</h2></a>
-    <a href="/entry/create/choose"><h2>Create</h2></a>
+    <a href="/" <% if (navpick == "home") { %>class="navpicked"<% } %>><h2>Home</h2></a>
+    <a href="/entry" <% if (navpick == "entry") { %>class="navpicked"<% } %>><h2>Characters</h2></a>
 </nav>

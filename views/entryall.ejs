@@ -1,0 +1,23 @@
+<%- include('./partials/head') %>
+    <div class="mainBox">
+        <h1>Create!</h1>
+        <div class="flexrow">
+            <form action="/entry/create/template" method="post" class="noForm"> 
+                <button class="noButton"><h2 class="smallButton">Create template</h2></button>
+            </form>
+            <a href="/entry/create"><h2 class="smallButton">Create from scratch</h2></a>
+            <a href="/entry/upload"><h2 class="smallButton">Upload from file</h2></a>
+        </div>
+        <br>
+        <h1>Characters:</h1>
+        <form action="/entry" method="get" class="searchbar">
+            <input type="text" name="search" placeholder="Search..." value="<%= search %>">
+        </form>
+        <% for( entry of entries ) { %>
+            <%- include('./partials/entrycard') %>
+        <% } %>
+        <% if (entries.length < 1) { %>
+            <h2>No results...</h2>
+        <% } %>
+    </div>
+<%- include('./partials/foot') %>

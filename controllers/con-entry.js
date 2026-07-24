@@ -1,5 +1,6 @@
 const archiver = require('archiver')
 const fs = require('fs')
+const AdmZip = require('adm-zip')
 
 const entryWrite = require('../handlers/entryWrite')
 const entryGet = require('../handlers/entryGet')
@@ -9,19 +10,32 @@ const entryFormat = require('../handlers/entryFormat')
 const fileDelete = require('../handlers/fileDelete')
 const folderDelete = require('../handlers/folderDelete')
 const renderErrorPage = require('../handlers/renderErrorPage')
+const setMetaData = require('../handlers/setMetaData')
 
 const model = require('../model')
 const stats = model.stats
 const variations = model.variations
 
-const createChoose_get = (req, res) => {
-    res.render('entrycreatechoose', { })
+const list_get = async (req, res) => {
+    setMetaData(req, res, 'entry list get', 'All characters', "entry")
+    const entries = await entryGet()
+    let results = entries
+    const search = req.query.search
+    if (search) {
+        const term = search.toLowerCase()
+        results = entries.filter(e =>
+            e.name.toLowerCase().includes(term)
+        )
+    }
+    res.render('entryall', { entries: results, search })
 }
 const create_get = async (req, res) => {
+    setMetaData(req, res, 'entry create get', 'Create new character')
     const lib = await entryLib()
     res.render('entrycreate', { stats, variations, lib })
 }
 const createTemplate_post = async (req, res) => {
+    setMetaData(req, res, 'entry create template post')
     const object = {
         stats: {}
     }
@@ -31,6 +45,7 @@ const createTemplate_post = async (req, res) => {
     res.redirect(`/entry/view/${object.id}`)
 }
 const create_post = async (req, res) => {
+    setMetaData(req, res, 'entry create post')
     const input = req.body
     let output = await entryParse(input)
     console.log(output)
@@ -48,10 +63,12 @@ const edit_get = async (req, res) => {
     const lib = await entryLib()
     const entries = await entryGet()
     const entry = entries.find(e => e.id == id)
+    setMetaData(req, res, 'entry edit get', `${entry.name} (editting...)`)
     if (!entry) return renderErrorPage(res, 404, 'No page found.')
     res.render('entryedit', { stats, variations, entry, lib })
 }
 const edit_post = async (req, res) => {
+    setMetaData(req, res, 'entry edit post')
     const input = req.body
     const id = req.params.id
     const entries = await entryGet()
@@ -73,6 +90,7 @@ const view_get = async (req, res) => {
     const entries = await entryGet()
     const id = req.params.id
     const entry = entries.find(e => e.id == id)
+    setMetaData(req, res, 'entry view get', `${entry.name}`)
     if (!entry) return renderErrorPage(res, 404, 'No page found.')
     res.render('entryview', { stats, variations, entry })
 }
@@ -80,6 +98,7 @@ const imgch_get = async (req, res) => {
     const entries = await entryGet()
     const id = req.params.id
     const entry = entries.find(e => e.id == id)
+    setMetaData(req, res, 'entry imgch get', `${entry.name} (changing image...)`)
     if (!entry) return renderErrorPage(res, 404, 'No page found.')
     
     const folderName = 'public/entimg'
@@ -94,6 +113,7 @@ const imgch_get = async (req, res) => {
     res.render('entryimgch', { entry })
 }
 const imgch_post = async (req, res) => {
+    setMetaData(req, res, 'entry imgch post')
     const entries = await entryGet()
     const id = req.params.id
     const entry = entries.find(e => e.id == id)
@@ -103,9 +123,11 @@ const imgch_post = async (req, res) => {
     res.redirect(`/entry/view/${id}`)
 }
 const delete_get = (req, res) => {
+    setMetaData(req, res, 'entry deleted get', `Deleted character!`)
     res.render('entryDeleted')
 }
 const delete_post = async (req, res) => {
+    setMetaData(req, res, 'entry delete post')
     const entries = await entryGet()
     const id = req.params.id
     const entry = entries.find(e => e.id == id)
@@ -120,7 +142,7 @@ const delete_post = async (req, res) => {
     const filefail = await folderDelete(`entries/entry-${entry.id}`)
     if (filefail) return res.json({ message: 'entry deletion fail' })
     
-    return res.redirect('/')
+    return res.redirect('/entry/deleted')
 }
 const format_get = async (req, res) => {
     const entries = await entryGet()
@@ -138,6 +160,7 @@ const format_get = async (req, res) => {
     const archive = archiver('zip', { zlib: { level: 9 } })
     archive.pipe(res)
     archive.append(entryF, { name: "document.txt" })
+    archive.file(`entries/entry-${entry.id}/data.json`, { name: 'data.json'})
     if (entry.img) {
         console.log(entry.img)
         const imageLoc = `public/entimg/${entry.img}`
@@ -148,9 +171,40 @@ const format_get = async (req, res) => {
     }
     archive.finalize()
 }
+const upload_get = (req, res) => {
+    setMetaData(req, res, 'entry upload get', "Upload character")
+    res.render('entryupload')
+}
+const upload_post = async (req, res) => {
+    setMetaData(req, res, 'entry upload post')
+    const zip = new AdmZip('.temp/upload.zip')
+    const zipEntries = zip.getEntries()
+    if (fs.existsSync('.temp/uploadExctr')) fs.rmdirSync('.temp/uploadExctr', { recursive: true, force: true })
+    await fs.mkdirSync('.temp/uploadExctr')
+    zip.extractAllTo('.temp/uploadExctr/', true)
+    const uEFiles = await fs.readdirSync('.temp/uploadExctr')
+
+    console.log(uEFiles)
+
+    const data = JSON.parse(await fs.readFileSync('.temp/uploadExctr/data.json', "utf-8"))
+    data.id = await model.createId()
+    console.log(data)
+    
+    const imgFile = uEFiles.find(f => f.startsWith('image.'))
+    if (imgFile) {
+        const newImageName = `${data.id}.${imgFile.split(".")[1]}`
+        await fs.renameSync(`.temp/uploadExctr/${imgFile}`, `public/entimg/${newImageName}`)
+        data.img = newImageName
+    }
+
+    entryWrite(data, data.id)
+    fs.rmdirSync('.temp/uploadExctr', { recursive: true, force: true })
+    fs.rmSync('.temp/upload.zip')
+    res.redirect(`/entry/view/${data.id}`)
+}
 
 module.exports = {
-    createChoose_get,
+    list_get,
     createTemplate_post,
     create_get,
     create_post,
@@ -161,5 +215,7 @@ module.exports = {
     imgch_post,
     delete_get,
     delete_post,
-    format_get
+    format_get,
+    upload_get,
+    upload_post
 }
