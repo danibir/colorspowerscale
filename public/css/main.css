@@ -50,7 +50,7 @@ nav {
     flex-direction: row;
     background-color: var(--tri);
     border-radius: 2px;
-    width: 60vw;
+    width: calc(60vw + 60px);
 }
 nav a {
     display: flex;

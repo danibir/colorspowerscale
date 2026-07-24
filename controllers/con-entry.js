@@ -134,12 +134,13 @@ const delete_post = async (req, res) => {
     if (!entry) return renderErrorPage(res, 500, `Server issue. (you tried to delete an entry that doesn't exist.)`)
 
     if (entry.img) {
-        const imgfail = fileDelete('public/entimg', entry.img)
+        const imgfail = fileDelete('public/localImg/entry', entry.img)
         if (imgfail) return res.json({ message: 'image deletion fail' })
         delete entry.img
+        entryWrite(entry, entry.id)
     }
 
-    const filefail = await folderDelete(`entries/entry-${entry.id}`)
+    const filefail = await folderDelete(`.localData/entries/entry-${entry.id}`)
     if (filefail) return res.json({ message: 'entry deletion fail' })
     
     return res.redirect('/entry/deleted')
@@ -160,10 +161,10 @@ const format_get = async (req, res) => {
     const archive = archiver('zip', { zlib: { level: 9 } })
     archive.pipe(res)
     archive.append(entryF, { name: "document.txt" })
-    archive.file(`entries/entry-${entry.id}/data.json`, { name: 'data.json'})
+    archive.file(`.localData/entries/entry-${entry.id}/data.json`, { name: 'data.json'})
     if (entry.img) {
         console.log(entry.img)
-        const imageLoc = `public/entimg/${entry.img}`
+        const imageLoc = `public/localImg/entry/${entry.img}`
         const newImageName = `image.${entry.img.split(".")[1]}`
         console.log(imageLoc)
         console.log(newImageName)
